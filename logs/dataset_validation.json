@@ -1,0 +1,49 @@
+{
+  "total_images": 1260,
+  "total_boxes": 18143,
+  "per_split": {
+    "test": {
+      "images": 126,
+      "boxes": 1881,
+      "classes": {
+        "0": 133,
+        "1": 1699,
+        "2": 49
+      },
+      "no_label": 0,
+      "empty_label": 0
+    },
+    "train": {
+      "images": 882,
+      "boxes": 12510,
+      "classes": {
+        "0": 908,
+        "1": 11220,
+        "2": 382
+      },
+      "no_label": 0,
+      "empty_label": 0
+    },
+    "val": {
+      "images": 252,
+      "boxes": 3752,
+      "classes": {
+        "0": 257,
+        "1": 3383,
+        "2": 112
+      },
+      "no_label": 0,
+      "empty_label": 0
+    }
+  },
+  "image_sizes": {
+    "575x575": 500,
+    "360x363": 486,
+    "640x480": 160,
+    "256x256": 100,
+    "366x369": 14
+  },
+  "filename_overlap_between_splits": {},
+  "n_problems": 0,
+  "problems_first_50": []
+}
