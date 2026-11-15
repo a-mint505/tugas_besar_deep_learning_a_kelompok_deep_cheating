@@ -1,0 +1,4 @@
+split,images,platelets,mean_per_img,max_per_img,pct_img_without_platelet
+train,882,382,0.43,6,72.2
+val,252,112,0.44,5,74.6
+test,126,49,0.39,4,73.0

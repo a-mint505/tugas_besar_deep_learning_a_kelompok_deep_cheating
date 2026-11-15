@@ -1,0 +1,6 @@
+source,images,platelets,median_platelet_sqrt_area_px,platelets_per_img
+256x256,100,3,18.439,0.03
+360x363,486,336,30.895,0.691
+575x575,500,31,53.675,0.062
+640x480,160,167,39.472,1.044
+lainnya,14,6,38.242,0.429
