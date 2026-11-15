@@ -1,0 +1,34 @@
+{
+  "threshold": 30,
+  "pairs": 124,
+  "pair_types": {
+    "train-val": 70,
+    "train-test": 39,
+    "val-test": 15
+  },
+  "val_dengan_kembaran_train": 24,
+  "test_dengan_kembaran_train": 17,
+  "test_dengan_kembaran_val": 7,
+  "dibuang": {
+    "train": {
+      "asal": 882,
+      "sisa": 787,
+      "dibuang": 95,
+      "kotak_hilang_per_kelas": {
+        "0": 100,
+        "1": 1159,
+        "2": 17
+      }
+    },
+    "val": {
+      "asal": 252,
+      "sisa": 239,
+      "dibuang": 13,
+      "kotak_hilang_per_kelas": {
+        "0": 14,
+        "1": 154,
+        "2": 1
+      }
+    }
+  }
+}

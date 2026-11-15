@@ -1,0 +1,15 @@
+{
+  "n_images": 1260,
+  "md5_groups": 0,
+  "md5_groups_cross_split": 0,
+  "phash_baseline_percentiles": {
+    "p0.01": 12.0,
+    "p0.1": 14.0,
+    "p1": 16.0,
+    "p5": 18.0,
+    "p50": 22.0
+  },
+  "report_max_dist": 16,
+  "n_candidates_total": 19856,
+  "n_candidates_cross_split": 8894
+}
