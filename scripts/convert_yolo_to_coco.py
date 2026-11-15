@@ -1,5 +1,11 @@
-"""Konversi anotasi YOLO (TXL-PBC) ke COCO JSON berdasarkan splits/*.txt,
-lalu buat contact sheet untuk pemeriksaan visual."""
+"""Konversi anotasi YOLO (TXL-PBC) ke COCO JSON berdasarkan splits/*.txt.
+
+  python scripts/convert_yolo_to_coco.py clean      -> data/processed/coco_clean/  (default)
+  python scripts/convert_yolo_to_coco.py official   -> data/processed/coco/ (+ contact sheet)
+
+category_id COCO = id YOLO + 1 (0 dipakai sebagai latar belakang oleh torchvision).
+"""
+import argparse
 import json
 import random
 from collections import Counter
@@ -12,11 +18,18 @@ from utils import read_split
 from validate_dataset import find_label
 
 ROOT = Path("data/raw/txl_pbc")
-OUT_DIR = Path("data/processed/coco")
 FIG_PATH = Path("figures/conversion_check.png")
-SPLITS = ["train", "val", "test"]
-CLASS_NAMES = None   # isi manual kalau data.yaml tidak ditemukan, mis. ["WBC", "RBC", "Platelet"]
+CLASS_NAMES = None   # isi manual kalau data.yaml tidak ditemukan
 COLORS = {1: "red", 2: "lime", 3: "cyan", 4: "yellow"}
+
+# nama file JSON -> nama daftar di splits/
+VARIANTS = {
+    "official": {"out_dir": "data/processed/coco",
+                 "splits": {"train": "train", "val": "val", "test": "test"}},
+    "clean": {"out_dir": "data/processed/coco_clean",
+              "splits": {"train": "train_clean", "val": "val_clean", "test": "test",
+                         "test_unflagged": "test_unflagged"}},
+}
 
 
 def load_class_names():
@@ -31,11 +44,11 @@ def load_class_names():
     return list(names)
 
 
-def yolo_to_coco(split, class_names):
+def yolo_to_coco(list_name, class_names):
     images, annotations = [], []
     ann_id, n_yolo, skipped, clipped = 1, 0, 0, 0
 
-    for img_id, img_path in enumerate(read_split(split, str(ROOT)), start=1):
+    for img_id, img_path in enumerate(read_split(list_name, str(ROOT)), start=1):
         with Image.open(img_path) as im:
             W, H = im.size
         images.append({"id": img_id,
@@ -116,23 +129,35 @@ def draw_sheet(cocos, n_random=12, n_platelet=12, seed=42, thumb=360, cols=4):
 
 
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("variant", nargs="?", default="clean", choices=list(VARIANTS))
+    variant = ap.parse_args().variant
+    cfg = VARIANTS[variant]
+    out_dir = Path(cfg["out_dir"])
+    out_dir.mkdir(parents=True, exist_ok=True)
+
     class_names = load_class_names()
     print("urutan kelas (YOLO id -> nama):", dict(enumerate(class_names)))
-    OUT_DIR.mkdir(parents=True, exist_ok=True)
 
     cocos = {}
-    for split in SPLITS:
-        coco, n_yolo, skipped, clipped = yolo_to_coco(split, class_names)
-        cocos[split] = coco
-        (OUT_DIR / f"{split}.json").write_text(json.dumps(coco))
+    for key, list_name in cfg["splits"].items():
+        if not Path("splits", f"{list_name}.txt").exists():
+            print(f"LEWATI {key}: splits/{list_name}.txt tidak ada")
+            continue
+        coco, n_yolo, skipped, clipped = yolo_to_coco(list_name, class_names)
+        cocos[key] = coco
+        (out_dir / f"{key}.json").write_text(json.dumps(coco))
 
         n_coco = len(coco["annotations"])
         per_cls = Counter(a["category_id"] for a in coco["annotations"])
-        print(f"{split}: {len(coco['images'])} citra, {n_coco} kotak "
+        print(f"{key}: {len(coco['images'])} citra, {n_coco} kotak "
               f"(YOLO {n_yolo}, dibuang {skipped}, terpotong {clipped}), per kelas: {dict(sorted(per_cls.items()))}")
-        assert n_coco + skipped == n_yolo, f"{split}: jumlah kotak tidak cocok"
+        assert n_coco + skipped == n_yolo, f"{key}: jumlah kotak tidak cocok"
 
-    draw_sheet(cocos)
+    assert {"train", "val", "test"} <= cocos.keys(), "split utama tidak lengkap"
+    if variant == "official":
+        draw_sheet({k: cocos[k] for k in ("train", "val", "test")})
+    print(f"\nSelesai: {out_dir}")
 
 
 if __name__ == "__main__":
