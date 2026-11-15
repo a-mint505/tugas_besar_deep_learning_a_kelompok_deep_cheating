@@ -1,0 +1,18 @@
+Lingkungan data/EDA (laptop, CPU), dicatat 11 November 2026
+Python 3.13.18
+
+numpy==2.4.6
+pandas==2.2.3
+pillow==11.3.0
+opencv-python==5.0.0.93
+pycocotools==2.0.11
+
+# Isi setelah diinstal dan dites (belum ada di daftar versimu):
+matplotlib==3.11.0
+imagehash==4.3.2
+# ultralytics==<versi>
+# torchmetrics==<versi>
+# grad-cam==<versi>
+
+# torch dan torchvision tidak dipinkan di sini (di Colab sudah terpasang).
+# Versi lokal: torch==2.14.1+cpu, torchvision==0.29.1+cpu
