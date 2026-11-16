@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-COCO_DIR = Path("data/processed/coco")
+COCO_DIR = Path("data/processed/coco_clean")
 LOG_DIR, FIG_DIR = Path("logs"), Path("figures")
 SPLITS = ["train", "val", "test"]
 TOP_SOURCES = ["575x575", "360x363", "640x480", "256x256"]  # dari validate_dataset.py
