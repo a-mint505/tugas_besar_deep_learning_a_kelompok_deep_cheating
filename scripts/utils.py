@@ -2,6 +2,34 @@ import os
 import random
 from pathlib import Path
 
+RUN_FIELDS = [
+    "run_id", "date", "member", "model", "purpose", "ablation_factor", "factor_value",
+    "seed", "train_split", "val_split", "imgsz_or_min_size", "epochs", "batch_size", "lr",
+    "pretrained", "env", "config_path", "commit",
+    "val_map50", "val_map50_95", "val_ap50_platelet", "val_mae_platelet",
+    "params_m", "latency_ms", "status", "notes",
+]
+
+
+def log_run(member: str, **row):
+    """Tambah satu baris ke logs/runs_<member>.csv (dibuat jika belum ada).
+    purpose: baseline | main | ablation | tuning; status: ok | failed | diverged | partial."""
+    import csv
+    from datetime import date
+
+    path = Path("logs") / f"runs_{member}.csv"
+    path.parent.mkdir(exist_ok=True)
+    row.setdefault("date", date.today().isoformat())
+    row["member"] = member
+    unknown = set(row) - set(RUN_FIELDS)
+    assert not unknown, f"kolom tidak dikenal: {unknown}"
+    new = not path.exists()
+    with open(path, "a", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=RUN_FIELDS)
+        if new:
+            w.writeheader()
+        w.writerow(row)
+
 
 def set_seed(seed: int = 42, deterministic: bool = True) -> int:
     """Atur seed untuk Python, NumPy, dan PyTorch (jika terpasang).

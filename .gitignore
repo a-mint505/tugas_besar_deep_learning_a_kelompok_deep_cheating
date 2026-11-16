@@ -218,3 +218,18 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# sisa jalur tinjauan manual dan hasil ambang lama (T=61), tidak dipakai
+figures/_tmp_*
+figures/leakage_review_*.png
+scripts/_tmp_*
+scripts/leakage_verdicts.py
+scripts/make_clean_splits.py
+logs/leakage_verdicts.csv
+logs/leakage_visual_candidates.csv
+logs/leakage_review_list.csv
+logs/leakage_auto_summary.json
+
+# editor dan catatan pribadi
+.vscode/
+langkah.txt
