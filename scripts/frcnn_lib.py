@@ -268,6 +268,7 @@ def coco_eval(gt, results, img_ids, verbose=False):
         ev.evaluate(); ev.accumulate(); ev.summarize()
     nan_if_neg = lambda v: float("nan") if v < 0 else float(v)
     out["map50_95"], out["map50"] = nan_if_neg(ev.stats[0]), nan_if_neg(ev.stats[1])
+    out["ap_small"] = nan_if_neg(ev.stats[3])   # AP_small COCO; urutan summarize: 0=AP, 1=AP50, 2=AP75, 3=small
     prec = ev.eval["precision"]            # [T(IoU), R(recall), K(kelas), A(area), M(maxDets)]
     for k, cid in enumerate(ev.params.catIds):
         name = CLASS_IDS[cid]
@@ -275,6 +276,8 @@ def coco_eval(gt, results, img_ids, verbose=False):
         pall = prec[:, :, k, 0, 2]
         out[f"ap50_{name}"] = float(p50[p50 > -1].mean()) if (p50 > -1).any() else float("nan")
         out[f"ap_{name}"] = float(pall[pall > -1].mean()) if (pall > -1).any() else float("nan")
+        rec = ev.eval["recall"][0, k, 0, 2]      # IoU 0.5, semua ukuran, maxDets=100
+        out[f"recall50_{name}"] = float(rec) if rec > -1 else float("nan")
     return out
 
 

@@ -220,7 +220,7 @@ def main():
                 scaler.step(opt)
                 scaler.update()
                 sched.step()
-                run_loss += float(loss); n_it += 1
+                run_loss += loss.item(); n_it += 1
 
             m = {"map50": float("nan"), "map50_95": float("nan"), "ap50_Platelets": float("nan")}
             if (epoch + 1) % args.eval_every == 0 or epoch + 1 == args.epochs:
@@ -247,6 +247,7 @@ def main():
         model.load_state_dict(torch.load(best_ckpt, map_location=device)["model"])
         model.roi_heads.score_thresh = args.eval_score_thresh
         results = predict(model, val_ds, device, num_workers=args.num_workers)
+        (out / "val_predictions.json").write_text(json.dumps(results))
         m = coco_eval(gt, results, val_ids, verbose=True)
         mae = platelet_count_mae(gt, results, val_ids, score_thr=args.mae_score_thr)
         model.roi_heads.score_thresh = 0.05
