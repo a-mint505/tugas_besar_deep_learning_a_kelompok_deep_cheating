@@ -1,0 +1,7 @@
+train: C:/Kuliah/Smt 5/DL/Tugas Besar/tugas_besar_deep_learning_a_kelompok_deep_cheating/data/processed/yolo/train_clean.txt
+val: C:/Kuliah/Smt 5/DL/Tugas Besar/tugas_besar_deep_learning_a_kelompok_deep_cheating/data/processed/yolo/val_clean.txt
+test: C:/Kuliah/Smt 5/DL/Tugas Besar/tugas_besar_deep_learning_a_kelompok_deep_cheating/data/processed/yolo/test.txt
+names:
+  0: WBC
+  1: RBC
+  2: Platelets

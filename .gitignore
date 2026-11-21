@@ -229,6 +229,7 @@ logs/leakage_verdicts.csv
 logs/leakage_visual_candidates.csv
 logs/leakage_review_list.csv
 logs/leakage_auto_summary.json
+data/raw/
 
 # editor dan catatan pribadi
 .vscode/
