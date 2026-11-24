@@ -1,0 +1,9 @@
+img,image_id,file_name,sumber,kind,subtype,cat,kelas,score,x,y,w,h,ukuran,iou,gx,gy,gw,gh,bertumpuk,tepi,kecil,kategori_manual,grup
+110,111,TXL-PBC/images/val/6bc4d558f88451fe9c83e6e61283d522.png,360x363,FN,skor_rendah,3,Platelets,,221.67,273.44,22.22,22.78,kecil,0.6616318791841896,,,,,True,False,True,,FN/skor_rendah
+145,146,TXL-PBC/images/val/974ff330abb75986abf60c462fb8ee03.png,360x363,FN,skor_rendah,3,Platelets,,153.0,55.0,22.0,30.0,kecil,0.7936392166546333,,,,,False,False,True,,FN/skor_rendah
+86,87,TXL-PBC/images/val/51c5de3e8f665497ad6ab973a0cba370.png,575x575,FN,skor_rendah,3,Platelets,,53.0,25.0,42.0,32.0,sedang,0.5226073017170255,,,,,False,False,False,,FN/skor_rendah
+88,89,TXL-PBC/images/val/51f530c03fb253cbb64f9b02d101d4ed.png,640x480,FN,skor_rendah,3,Platelets,,203.0,392.0,30.0,30.0,kecil,0.754071903832203,,,,,False,False,True,,FN/skor_rendah
+178,179,TXL-PBC/images/val/b9ab552cbfb45fe38714ee93ef269b42.png,256x256,FP,latar_belakang,3,Platelets,0.594569206237793,195.58848571777344,129.26251220703125,22.203994750976562,21.951217651367188,kecil,0.07197743969180169,,,,,True,False,True,,FP/latar_belakang
+224,225,TXL-PBC/images/val/f38d6f391cc65f2f96a2bf585c858c47.png,360x363,FP,latar_belakang,3,Platelets,0.7799036502838135,230.05662536621094,0.0032844184897840023,32.26673889160156,14.811126744840294,kecil,0.019128725685890417,,,,,False,True,True,,FP/latar_belakang
+10,11,TXL-PBC/images/val/0af8063432f856a4b0100244ec0c23eb.png,575x575,FP,latar_belakang,3,Platelets,0.6879171133041382,543.1143188476562,0.012742578983306885,31.88568115234375,29.752037465572357,kecil,0.0,,,,,False,True,True,,FP/latar_belakang
+194,195,TXL-PBC/images/val/d01d53620a3d53908c207b2ea979c64c.png,640x480,FP,latar_belakang,3,Platelets,0.7113701701164246,340.477783203125,442.68670654296875,28.75103759765625,27.2696533203125,kecil,0.012894525108853005,,,,,True,False,True,,FP/latar_belakang
